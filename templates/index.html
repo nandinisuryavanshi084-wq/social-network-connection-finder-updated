@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Social Network Connection Finder</title><link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}"></head>
+<body><div class="shell">
+<header><div><small>DATA STRUCTURES & ALGORITHMS</small><h1>Social Network Connection Finder</h1><p>Interactive Graph • BFS • DFS • Algorithm Analysis</p></div>
+<div><button class="btn light" onclick="resetSample()">Load Sample</button><button class="btn danger" onclick="clearNetwork()">Clear Network</button></div></header>
+<div class="stats"><div><span>Users</span><b id="userCount">0</b></div><div><span>Connections</span><b id="edgeCount">0</b></div><div><span>Last Algorithm</span><b id="lastAlgorithm">—</b></div><div><span>Graph</span><b>Undirected</b></div></div>
+<div id="msg" class="msg hidden"></div>
+<main>
+<section class="card"><small>01 / FIND CONNECTION</small><h2>Run an Algorithm</h2>
+<div class="forms"><label>Start<select id="startUser"></select></label><label>Target<select id="targetUser"></select></label><label>Algorithm<select id="algorithm"><option>BFS</option><option>DFS</option></select></label></div>
+<button class="btn primary" onclick="runAlgorithm()">Run Algorithm</button> <button class="btn outline" onclick="compareAlgorithms()">Compare BFS vs DFS</button>
+<div id="result" class="result hidden"></div></section>
+
+<section class="card graph"><small>02 / GRAPH VISUALIZATION</small><h2>Your Network</h2><div id="empty" class="empty">Add users and connections to build your own network.</div><svg id="svg" viewBox="0 0 900 520"></svg></section>
+
+<section class="card full"><small>03 / NETWORK BUILDER</small><h2>Build Your Own Network</h2>
+<div class="manage">
+<form onsubmit="addUser(event)"><h3>Add User</h3><input id="newUser" placeholder="e.g. Nandini" required><button class="btn primary">Add User</button></form>
+<form onsubmit="removeUser(event)"><h3>Remove User</h3><select id="removeUser"></select><button class="btn danger">Remove User</button></form>
+<form onsubmit="addConnection(event)"><h3>Add Connection</h3><div class="two"><select id="addA"></select><select id="addB"></select></div><button class="btn primary">Add Connection</button></form>
+<form onsubmit="removeConnection(event)"><h3>Remove Connection</h3><div class="two"><select id="remA"></select><select id="remB"></select></div><button class="btn danger">Remove Connection</button></form></div></section>
+
+<section id="compare" class="card full hidden"><small>04 / ALGORITHM COMPARISON</small><h2>BFS vs DFS — Same Query</h2><div id="comparison"></div><p id="notes" class="note"></p></section>
+
+<section class="card full"><small>05 / ALGORITHM ANALYSIS</small><h2>Complexity & Characteristics</h2>
+<table><thead><tr><th>Parameter</th><th>BFS</th><th>DFS</th></tr></thead><tbody>
+<tr><td>Basic idea</td><td>Level-by-level exploration</td><td>Depth-first exploration</td></tr><tr><td>Data structure</td><td>Queue (FIFO)</td><td>Stack (LIFO)</td></tr>
+<tr><td>Time complexity</td><td><b>O(V + E)</b></td><td><b>O(V + E)</b></td></tr><tr><td>Space complexity</td><td><b>O(V)</b></td><td><b>O(V)</b></td></tr>
+<tr><td>Shortest path</td><td>Guaranteed in unweighted graph</td><td>Not guaranteed</td></tr><tr><td>Typical use</td><td>Minimum connections / levels</td><td>Deep exploration / reachability</td></tr>
+</tbody></table><div class="analysis"><article><b>V = Vertices</b><p>Number of users.</p></article><article><b>E = Edges</b><p>Number of connections.</p></article><article><b>Why O(V+E)?</b><p>With an adjacency list, each vertex and edge is processed at most a constant number of times.</p></article></div></section>
+</main><footer>DSA Project • Flask + Python</footer></div><script src="{{ url_for('static',filename='script.js') }}"></script></body></html>
